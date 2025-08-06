@@ -1,64 +1,52 @@
 'use client';
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { useTranslations } from "next-intl";
 
 interface MenuItem {
   href: string;
-  label: string;
-  description: string;
-  baseColor: string;  // Soluk hali
-  hoverColor: string; // Hover'da canlanan hali
+  baseColor: string;
+  hoverColor: string;
+  key: keyof typeof footerKeys;
 }
 
+// Bu key'ler common.json'daki footer objesindeki anahtarlarla birebir eşleşmeli
+const footerKeys = {
+  product: "product",
+  pricing: "pricing",
+  about: "about",
+  contact: "contact",
+  privacyPolicy: "privacyPolicy",
+};
+
 export default function Footer() {
-  const menuItems: MenuItem[] = [
-    {
-      href: "/product",
-      label: "Ürün",
-      description: "Ürünlerimiz hakkında detaylı bilgi alın.",
-      baseColor: "#ffffff",
-      hoverColor: "#f43f5e", // rose-500
-    },
-    {
-      href: "/pricing",
-      label: "Fiyatlandırma",
-      description: "Fiyatlarımız ve paket seçenekleri.",
-      baseColor: "#d4d4d4",
-      hoverColor: "#10b981", // emerald-500
-    },
-    {
-      href: "/about",
-      label: "Hakkımızda",
-      description: "Biz kimiz, nasıl çalışıyoruz?",
-      baseColor: "#a3a3a3",
-      hoverColor: "#3b82f6", // blue-500
-    },
-    {
-      href: "/contact",
-      label: "İletişim",
-      description: "Bize nasıl ulaşabilirsiniz?",
-      baseColor: "#737373",
-      hoverColor: "#f59e0b", // amber-500
-    },
-    {
-      href: "/privacy-policy",
-      label: "Gizlilik Politikası",
-      description: "Veri gizliliği ve kullanım şartları.",
-      baseColor: "#525252",
-      hoverColor: "#8b5cf6", // violet-500
-    },
+  const t = useTranslations("footer");
+
+  const menuItemsData: MenuItem[] = [
+    { href: "/product", baseColor: "#ffffff", hoverColor: "#f43f5e", key: "product" },
+    { href: "/pricing", baseColor: "#d4d4d4", hoverColor: "#10b981", key: "pricing" },
+    { href: "/about", baseColor: "#a3a3a3", hoverColor: "#3b82f6", key: "about" },
+    { href: "/contact", baseColor: "#737373", hoverColor: "#f59e0b", key: "contact" },
+    { href: "/privacy-policy", baseColor: "#525252", hoverColor: "#8b5cf6", key: "privacyPolicy" },
   ];
 
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [draw, setDraw] = useState(false);
+  const drawRef = useRef(draw);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  // draw state'ini güncel tut
+  useEffect(() => {
+    drawRef.current = draw;
+  }, [draw]);
 
   useEffect(() => {
     const handleScroll = () => {
       const triggerPoint = window.innerHeight / 1.2;
       const footerTop = document.getElementById("footer")?.getBoundingClientRect().top || 0;
-      if (footerTop < triggerPoint) {
+
+      if (footerTop < triggerPoint && !drawRef.current) {
         setDraw(true);
       }
     };
@@ -69,7 +57,8 @@ export default function Footer() {
 
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("mousemove", handleMouseMove);
-    handleScroll();
+
+    handleScroll(); // sayfa yüklendiğinde kontrol et
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -78,7 +67,10 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer id="footer" className="w-full bg-[#11111b] text-white flex flex-col items-center py-20 select-none">
+    <footer
+      id="footer"
+      className="w-full bg-[#11111b] text-white flex flex-col items-center py-20 select-none"
+    >
       <div className="w-40 h-40 relative mb-12">
         <svg
           viewBox="0 0 200 200"
@@ -100,9 +92,12 @@ export default function Footer() {
       </div>
 
       <nav className="w-full max-w-[600px] px-4 relative">
-        {menuItems.map((item, i) => {
+        {menuItemsData.map((item, i) => {
           const isHovered = hoveredIndex === i;
           const color = isHovered ? item.hoverColor : item.baseColor;
+
+          const label = t(`${item.key}.label`);
+          const description = t(`${item.key}.description`);
 
           return (
             <div
@@ -114,13 +109,9 @@ export default function Footer() {
               <Link href={item.href}>
                 <div
                   style={{ color }}
-                  className={`
-                    text-center text-[5vh] font-semibold w-full
-                    transition-all duration-300
-                    cursor-pointer
-                  `}
+                  className="text-center text-[5vh] font-semibold w-full transition-all duration-300 cursor-pointer"
                 >
-                  {item.label}
+                  {label}
                 </div>
               </Link>
 
@@ -134,7 +125,7 @@ export default function Footer() {
                     whiteSpace: "nowrap",
                   }}
                 >
-                  {item.description}
+                  {description}
                 </div>
               )}
             </div>

@@ -7,33 +7,132 @@
     "signIn": "Giriş Yap",
     "signUp": "Kayıt Ol"
   },
-   "hero": {
-    "title1": "Sormak serbest.",
+  "hero": {
+    "title1": "Sorun, çekinmeyin.",
     "title2": "Cevap zaten hazır.",
-    "description": "İnsan gibi değil; daha hızlı, daha tutarlı, daha net."
+    "description": "İnsana benzemiyor; daha hızlı, tutarlı ve daha hassas."
   },
-   "draw": {
-    "questionPart1": "Bir soru sorun",
-    "questionPart2": "microAi hemen yanıtlasın."
+  "draw": {
+    "questionPart1": "Bir soru sor",
+    "questionPart2": "ve microAi anında cevap verir."
   },
-   "demoChat": {
-    "shippingQuestion": "kargo ne zaman gelir",
-    "shippingAnswer": "Siparişiniz 1-3 iş günü içinde kargoya verilir.",
-    "appointmentQuestion": "randevu nasıl alırım",
+  "demoChat": {
+    "shippingQuestion": "kargom ne zaman gelir",
+    "shippingAnswer": "Siparişiniz 1-3 iş günü içinde gönderilecektir.",
+    "appointmentQuestion": "randevu nasıl alabilirim",
     "appointmentAnswer": "Web sitemizden veya mobil uygulamamızdan kolayca randevu alabilirsiniz.",
-    "trainingDurationQuestion": "eğitim süresi ne kadar",
-    "trainingDurationAnswer": "Eğitim süresi genellikle 8 hafta sürmektedir.",
+    "trainingDurationQuestion": "eğitim ne kadar sürer",
+    "trainingDurationAnswer": "Eğitim genellikle 8 hafta sürer.",
     "contactInfoQuestion": "iletişim bilgileri nedir",
-    "contactInfoAnswer": "Bize info@microai.com adresinden ulaşabilirsiniz.",
-    "noAnswer": "Bu soruya şu anda yanıt veremiyorum.",
-    "loadQuestionsLabel": "Soruları Dosyadan Yükle (JSON)",
+    "contactInfoAnswer": "Bize info@microai.com üzerinden ulaşabilirsiniz.",
+    "noAnswer": "Şu anda bu soruya cevap veremiyorum.",
+    "loadQuestionsLabel": "Dosyadan Soruları Yükle (JSON)",
     "exampleQuestionsTitle": "Sorabileceğiniz Sorular",
-    "exampleQuestionTooltip": "Tıklayarak sorabilirsiniz",
+    "exampleQuestionTooltip": "Bu soruyu sormak için tıklayın",
     "labelUser": "Sen",
     "labelBot": "microAi",
     "inputPlaceholder": "Bir soru yazın...",
     "askButton": "Sor",
     "fileReadError": "Dosya okunamadı",
-    "invalidJson": "Geçersiz JSON formatı! Objekt bekleniyor."
-  }
+    "invalidJson": "Geçersiz JSON formatı! Bir obje bekleniyor."
+  },
+  "videoCarousel": {
+    "labels": {
+      "ecommerce": "E-Ticaret",
+      "health": "Sağlık",
+      "education": "Eğitim",
+      "corporate": "Kurumsal"
+    },
+    "descriptions": {
+      "orderStatus": "Sipariş durumu",
+      "appointment": "Randevu alma",
+      "courseInfo": "Kurs bilgisi",
+      "contactInfo": "İletişim bilgisi"
+    }
+  },
+  "footer": {
+    "product": {
+      "label": "Ürün",
+      "description": "Ürünlerimiz hakkında detaylı bilgi alın."
+    },
+    "pricing": {
+      "label": "Fiyatlandırma",
+      "description": "Fiyatlarımız ve paket seçeneklerimiz."
+    },
+    "about": {
+      "label": "Hakkımızda",
+      "description": "Biz kimiz ve nasıl çalışıyoruz."
+    },
+    "contact": {
+      "label": "İletişim",
+      "description": "Bize nasıl ulaşabilirsiniz."
+    },
+    "privacyPolicy": {
+      "label": "Gizlilik Politikası",
+      "description": "Veri gizliliği ve kullanım şartları."
+    }
+  },
+  "pricing": {
+    "title": "FİYATLANDIRMA",
+    "starter": {
+      "title": "Başlangıç",
+      "price": "Ücretsiz",
+      "features": [
+        "🌐 1 site entegrasyonu",
+        "📄 Dosya yükleyerek içerik eğitimi",
+        "📊 Aylık 100 sorgu limiti",
+        "🌍 Türkçe + İngilizce dil desteği",
+        "✅ Doğruysa cevap, yanlışsa sessiz",
+        "⏱️ Temel hızda yanıt (~1-2 sn)",
+        "🧪 microAi teknolojisini denemek için ideal"
+      ]
+    },
+    "pro": {
+      "title": "Profesyonel",
+      "price": "Ücretli",
+      "features": [
+        "🚀 Çoklu site entegrasyonu",
+        "📚 Limitsiz içerik yükleme (PDF, DOCX, TXT)",
+        "⚡ Gelişmiş bağlam farkındalığı ve hızlı yanıtlar",
+        "♾️ Limitsiz kullanıcı sorguları",
+        "🗣️ Çok dilli destek (Türkçe, İngilizce ve diğerleri)",
+        "📥 Slack ve e-posta özet entegrasyonu",
+        "📈 Soru geçmişi ve detaylı analiz paneli",
+        "🎧 Öncelikli destek ve SLA garantisi"
+      ]
+    },
+    "button": "7 Günlük Ücretsiz Denemeye Başla",
+    "contact": "Sen veya ekibin için daha fazlasına mı ihtiyacın var?",
+    "contactLink": "Bizimle iletişime geçin!"
+  },
+  "product": {
+    "title": "MicroAi ne yapar?",
+    "description": "🌐 Web sitenize gelen ziyaretçilerin sorularını, sizin verdiğiniz içeriklerden yanıtlar.",
+    "features": [
+      "Kolay entegrasyon",
+      "Çok dilli destek",
+      "Hızlı yanıt sistemi",
+      "Güvenilir ve ölçeklenebilir"
+    ],
+    "uploadTitle": "İçeriğinizi basitçe yükleyin: Dosya göndermek yeterli.",
+    "uploadClick": "Dosya yüklemek için tıklayın",
+    "uploadOrDrop": "veya sürükleyip bırakın",
+    "uploadAccepted": "PDF, DOCX, TXT kabul edilir",
+    "multiLangTitle": "Çok dilli destek (Türkçe ve diğerleri)",
+    "extraTitle": "Bilmiyorsa cevap vermez, yanıtlar doğru ve net olur"
+  },
+  "about": {
+  "title": "HAKKIMIZDA",
+  "waveAnimationAlt": "Dalga animasyonu",
+  "box1": "MicroAi olarak, yapay zeka teknolojileriyle işinizi bir adım öteye taşıyoruz.",
+  "box2": "Web sitenize gelen ziyaretçilerin sorularını, sizin sağladığınız içeriklere göre hızlı, doğru ve güvenilir biçimde yanıtlayan akıllı çözümler sunuyoruz.",
+  "box3": "Amacımız, müşteri deneyimini en üst seviyeye çıkarırken, size zaman ve maliyet avantajı sağlamaktır."
+},
+"contact": {
+  "title": "İLETİŞİM",
+  "description": "Her türlü soru, öneri ve destek talepleriniz için bize aşağıdaki iletişim kanallarından ulaşabilirsiniz.",
+  "videoNotSupported": "Tarayıcınız video etiketini desteklemiyor.",
+  "location": "İstanbul, Türkiye"
+}
+  
 }

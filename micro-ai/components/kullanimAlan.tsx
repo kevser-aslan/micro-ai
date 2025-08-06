@@ -1,131 +1,165 @@
-"use client";
+'use client';
 
-import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 
-type VideoItem = {
-  id: number;
-  src: string;
-  label: string;
-  description: string;
-};
+interface MenuItem {
+  href: string;
+  baseColor: string;
+  hoverColor: string;
+  labelKey: string;        // Çeviri anahtarı
+  descriptionKey: string;  // Çeviri anahtarı
+}
 
-const videos: VideoItem[] = [
+const menuItemsData: MenuItem[] = [
   {
-    id: 0,
-    src: "/videos/e-ticaret.mp4",
-    label: "E-ticaret",
-    description: "Sipariş durumu",
+    href: "/product",
+    baseColor: "#ffffff",
+    hoverColor: "#f43f5e",
+    labelKey: "product.label",
+    descriptionKey: "product.description",
   },
   {
-    id: 1,
-    src: "/videos/saglik.mp4",
-    label: "Sağlık",
-    description: "Randevu alma",
+    href: "/pricing",
+    baseColor: "#d4d4d4",
+    hoverColor: "#10b981",
+    labelKey: "pricing.label",
+    descriptionKey: "pricing.description",
   },
   {
-    id: 2,
-    src: "/videos/egitim.mp4",
-    label: "Eğitim",
-    description: "Kurs bilgileri",
+    href: "/about",
+    baseColor: "#a3a3a3",
+    hoverColor: "#3b82f6",
+    labelKey: "about.label",
+    descriptionKey: "about.description",
   },
   {
-    id: 3,
-    src: "/videos/kurumsal.mp4",
-    label: "Kurumsal",
-    description: "İletişim bilgileri",
+    href: "/contact",
+    baseColor: "#737373",
+    hoverColor: "#f59e0b",
+    labelKey: "contact.label",
+    descriptionKey: "contact.description",
+  },
+  {
+    href: "/privacy-policy",
+    baseColor: "#525252",
+    hoverColor: "#8b5cf6",
+    labelKey: "privacyPolicy.label",
+    descriptionKey: "privacyPolicy.description",
   },
 ];
 
-export default function VideoCarousel() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [progress, setProgress] = useState(0);
+export default function Footer() {
+  const t = useTranslations("footer");
+
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [draw, setDraw] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
-    const videoEl = videoRef.current;
-    if (!videoEl) return;
-
-    const handleEnded = () => {
-      setActiveIndex((prev) => (prev + 1) % videos.length);
+    const handleScroll = () => {
+      const triggerPoint = window.innerHeight / 1.2;
+      const footerTop = document.getElementById("footer")?.getBoundingClientRect().top || 0;
+      if (footerTop < triggerPoint) {
+        setDraw(true);
+      }
     };
 
-    videoEl.addEventListener("ended", handleEnded);
-    return () => videoEl.removeEventListener("ended", handleEnded);
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePos({ x: e.clientX, y: e.clientY });
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("mousemove", handleMouseMove);
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
   }, []);
 
-  useEffect(() => {
-    const videoEl = videoRef.current;
-    if (!videoEl) return;
-
-    videoEl.load();
-    videoEl.play().catch(() => {
-      videoEl.muted = true;
-      videoEl.play();
-    });
-
-    let frameId: number;
-
-    const updateProgress = () => {
-      if (videoEl.duration) {
-        const ratio = videoEl.currentTime / videoEl.duration;
-        setProgress(ratio);
-      }
-      frameId = requestAnimationFrame(updateProgress);
-    };
-
-    updateProgress();
-
-    return () => cancelAnimationFrame(frameId);
-  }, [activeIndex]);
-
   return (
-    <section className="w-full bg-[#11111b] text-white py-16 px-6  shadow-2xl">
-      <div className="max-w-6xl mx-auto flex flex-col items-center">
-        {/* Video gösterimi */}
-        <div className="w-full">
-          <video
-            key={videos[activeIndex].src}
-            ref={videoRef}
-            src={videos[activeIndex].src}
-            controls
-            className="w-full rounded-xl border border-[#1e1e2e] shadow-lg"
+    <footer
+      id="footer"
+      className="w-full bg-[#11111b] text-white flex flex-col items-center py-20 select-none"
+    >
+      <div className="w-40 h-40 relative mb-12">
+        <svg
+          viewBox="0 0 200 200"
+          fill="none"
+          stroke="#f87171"
+          strokeWidth="4"
+          strokeLinecap="round"
+          className="w-full h-full"
+        >
+          <path
+            d="M30 40 Q100 10 80 60 Q140 50 90 120"
+            className={`${draw ? "stroke-draw" : "stroke-hidden"}`}
           />
-        </div>
+          <path
+            d="M90 120 L90 140 L80 130 M90 140 L100 130"
+            className={`${draw ? "stroke-draw" : "stroke-hidden"}`}
+          />
+        </svg>
+      </div>
 
-       
+      <nav className="w-full max-w-[600px] px-4 relative">
+        {menuItemsData.map((item, i) => {
+          const isHovered = hoveredIndex === i;
+          const color = isHovered ? item.hoverColor : item.baseColor;
 
-        {/* Butonlar ve ayrı ayrı ilerleme çizgileri */}
-        <div className="flex  justify-center mt-10 gap-4 w-full ">
-          {videos.map((video, i) => {
-            const isActive = i === activeIndex;
-            return (
-              <div key={video.id} className="w-56">
-                {/* Her buton için üstteki çizgi */}
-                <div className="w-full h-1 bg-[#313244] rounded-full overflow-hidden mb-1">
-                  <div
-                    className={`h-full bg-blue-500 transition-all duration-100`}
-                    style={{ width: isActive ? `${progress * 100}%` : "0%" }}
-                  />
-                </div>
-
-                {/* Butonun kendisi */}
-                <button
-                  onClick={() => setActiveIndex(i)}
-                  className={`w-full px-4 py-2 rounded-md text-sm font-semibold text-left transition-all
-                    ${
-                      isActive
-                        ? "bg-[#313244] text-white border border-[#585b70]"
-                        : "bg-[#1e1e2e] text-[#cdd6f4] hover:bg-[#313244]"
-                    }
+          return (
+            <div
+              key={item.href}
+              className="relative my-4"
+              onMouseEnter={() => setHoveredIndex(i)}
+              onMouseLeave={() => setHoveredIndex(null)}
+            >
+              <Link href={item.href}>
+                <div
+                  style={{ color }}
+                  className={`
+                    text-center text-[5vh] font-semibold w-full
+                    transition-all duration-300
+                    cursor-pointer
                   `}
                 >
-                  <strong>{video.label}:</strong> {video.description}
-                </button>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </section>
+                  {t(item.labelKey)}
+                </div>
+              </Link>
+
+              {isHovered && (
+                <div
+                  className="fixed px-4 py-2 rounded-md text-sm font-medium text-white z-50 pointer-events-none transition-all duration-150"
+                  style={{
+                    top: mousePos.y + 16,
+                    left: mousePos.x + 16,
+                    backgroundColor: color,
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  {t(item.descriptionKey)}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </nav>
+
+      <style jsx>{`
+        .stroke-draw {
+          stroke-dasharray: 300;
+          stroke-dashoffset: 0;
+          transition: stroke-dashoffset 2s ease-in-out;
+        }
+        .stroke-hidden {
+          stroke-dasharray: 300;
+          stroke-dashoffset: 300;
+          transition: stroke-dashoffset 2s ease-in-out;
+        }
+      `}</style>
+    </footer>
   );
 }

@@ -37,10 +37,11 @@ export default function Navbar() {
       }`}
       style={{ willChange: "transform" }}
     >
-      <div className="flex items-center space-x-2">
-        <div className="w-6 h-6 bg-gradient-to-br from-[#1b4db1] to-[#3a267e] rounded-md" />
-        <span className="text-lg font-semibold">Micro-AI</span>
-      </div>
+      <Link href="/" className="flex items-center space-x-2">
+  <div className="w-6 h-6 bg-gradient-to-br from-[#1b4db1] to-[#3a267e] rounded-md" />
+  <span className="text-lg font-semibold">Micro-AI</span>
+</Link>
+
 
       <div className="hidden md:flex space-x-6 text-sm font-medium">
         <Link href="/product" className="hover:text-gray-300">

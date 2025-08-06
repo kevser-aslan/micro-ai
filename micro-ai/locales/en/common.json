@@ -12,11 +12,11 @@
     "title2": "The answer is already ready.",
     "description": "Not like a human; faster, more consistent, more precise."
   },
-   "draw": {
+  "draw": {
     "questionPart1": "Ask a question",
     "questionPart2": "and microAi will answer instantly."
   },
-    "demoChat": {
+  "demoChat": {
     "shippingQuestion": "when will my cargo arrive",
     "shippingAnswer": "Your order will be shipped within 1-3 business days.",
     "appointmentQuestion": "how do I get an appointment",
@@ -35,5 +35,104 @@
     "askButton": "Ask",
     "fileReadError": "File could not be read",
     "invalidJson": "Invalid JSON format! Expected an object."
-  }
+  },
+  "videoCarousel": {
+    "labels": {
+      "ecommerce": "E-commerce",
+      "health": "Health",
+      "education": "Education",
+      "corporate": "Corporate"
+    },
+    "descriptions": {
+      "orderStatus": "Order status",
+      "appointment": "Appointment booking",
+      "courseInfo": "Course info",
+      "contactInfo": "Contact info"
+    }
+  },
+  "footer": {
+    "product": {
+      "label": "Product",
+      "description": "Get detailed information about our products."
+    },
+    "pricing": {
+      "label": "Pricing",
+      "description": "Our prices and package options."
+    },
+    "about": {
+      "label": "About",
+      "description": "Who we are and how we work."
+    },
+    "contact": {
+      "label": "Contact",
+      "description": "How to reach us."
+    },
+    "privacyPolicy": {
+      "label": "Privacy Policy",
+      "description": "Data privacy and terms of use."
+    }
+  },
+  "pricing": {
+    "title": "PRICING",
+    "starter": {
+      "title": "Starter",
+      "price": "Free",
+      "features": [
+        "🌐 Integration for 1 website",
+        "📄 Content training via file upload",
+        "📊 Monthly 100 query limit",
+        "🌍 Turkish + English language support",
+        "✅ Answers when correct, silent if wrong",
+        "⏱️ Basic speed responses (~1-2 sec)",
+        "🧪 Ideal for testing microAi technology"
+      ]
+    },
+    "pro": {
+      "title": "Professional",
+      "price": "Paid",
+      "features": [
+        "🚀 Integration for multiple sites",
+        "📚 Unlimited content uploads (PDF, DOCX, TXT)",
+        "⚡ Advanced context-aware and fast replies",
+        "♾️ Unlimited user queries",
+        "🗣️ Multilingual support (Turkish, English, others)",
+        "📥 Slack and email summary integration",
+        "📈 Question history and detailed analytics dashboard",
+        "🎧 Priority support and SLA guarantee"
+      ]
+    },
+    "button": "Start 7-Day Free Trial",
+    "contact": "Need more for you or your team?",
+    "contactLink": "Contact us!"
+  },
+  "product": {
+    "title": "What does MicroAi do?",
+    "subtitle": "Enhance your customer service with AI.",
+    "description": "🌐 Answers your website visitors' questions based on the content you provide.",
+    "features": [
+      "Easily upload content files.",
+      "Supports multiple languages.",
+      "Provides accurate and clear answers.",
+      "Simple and fast to use."
+    ],
+    "uploadTitle": "Simply upload your content: Sending a file is enough.",
+    "uploadClick": "Click to upload a file",
+    "uploadOrDrop": "or drag and drop",
+    "uploadAccepted": "PDF, DOCX, TXT are accepted",
+    "multiLangTitle": "Multilingual support (Turkish and others)",
+    "extraTitle": "If it doesn't know, it won't answer; responses are accurate and clear."
+  },
+  "about": {
+  "title": "ABOUT US",
+  "waveAnimationAlt": "Wave animation",
+  "box1": "At MicroAi, we take your business one step further with AI technologies.",
+  "box2": "We offer smart solutions that answer questions from your website visitors based on the content you provide—quickly, accurately, and reliably.",
+  "box3": "Our goal is to enhance customer experience while saving you time and reducing costs."
+},
+"contact": {
+  "title": "CONTACT",
+  "description": "You can reach us via the following contact channels for any questions, suggestions, and support requests.",
+  "videoNotSupported": "Your browser does not support the video tag.",
+  "location": "Istanbul, Turkey"
+}
 }
