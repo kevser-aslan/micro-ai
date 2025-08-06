@@ -1,12 +1,7 @@
-import withNextIntl from 'next-intl/plugin';
-
+// next.config.ts
 const nextConfig = {
   reactStrictMode: true,
-  experimental: {
-    // serverActions veya appDir burada artık kullanılmaz
-  },
-  // i18n konfigürasyonu App Router’da desteklenmiyor, next-intl ile yönetilecek
+  // next-intl plugin veya i18n alanı GEREKLİ DEĞİL
 };
 
-export default withNextIntl(nextConfig, 
-);
+export default nextConfig;

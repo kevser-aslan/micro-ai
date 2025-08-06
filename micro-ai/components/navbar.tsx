@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 
 export default function Navbar() {
-  const t = useTranslations(); // Çeviri fonksiyonu
+  const t = useTranslations('navbar');
 
-  const [visible, setVisible] = useState(true); // Başlangıçta açık
+  const [visible, setVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
@@ -37,13 +37,11 @@ export default function Navbar() {
       }`}
       style={{ willChange: "transform" }}
     >
-      {/* Logo */}
       <div className="flex items-center space-x-2">
         <div className="w-6 h-6 bg-gradient-to-br from-[#1b4db1] to-[#3a267e] rounded-md" />
         <span className="text-lg font-semibold">Micro-AI</span>
       </div>
 
-      {/* Menü - Orta Kısım */}
       <div className="hidden md:flex space-x-6 text-sm font-medium">
         <Link href="/product" className="hover:text-gray-300">
           {t('product')}
@@ -59,7 +57,6 @@ export default function Navbar() {
         </Link>
       </div>
 
-      {/* Giriş / Kayıt - Sağ Kısım */}
       <div className="flex items-center space-x-4">
         <Link href="/signin" className="hover:text-gray-300">
           {t('signIn')}
