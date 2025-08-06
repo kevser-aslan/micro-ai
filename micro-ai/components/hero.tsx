@@ -7,7 +7,7 @@ export default function Hero() {
   const t = useTranslations("hero");
 
   return (
-    <section className="w-full min-h-[50vh] flex flex-col justify-start pt-15 items-center text-center px-6 bg-gradient-to-b from-[#0f0f1a] to-[#1a1a2e]">
+    <section className="w-full min-h-[50vh] flex flex-col justify-start pt-15 items-center text-center px-6 bg-[#11111b]">
       <motion.h1
         className="text-5xl md:text-7xl font-bold text-white leading-tight"
         initial={{ opacity: 0, y: -40 }}
