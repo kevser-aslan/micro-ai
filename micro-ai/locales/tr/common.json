@@ -1,9 +1,10 @@
 {
+  "navbar": {
     "product": "Ürün",
     "pricing": "Fiyatlandırma",
     "about": "Hakkımızda",
     "contact": "İletişim",
-    "signIn": "Giriş yap",
-    "signUp": "Kayıt ol"
+    "signIn": "Giriş Yap",
+    "signUp": "Kayıt Ol"
   }
-  
+}
