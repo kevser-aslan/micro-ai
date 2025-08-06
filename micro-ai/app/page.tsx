@@ -5,12 +5,10 @@ import { IntlProvider } from 'next-intl';
 
 import trMessages from '../locales/tr/common.json';
 import enMessages from '../locales/en/common.json';
-
 import Navbar from '@/components/navbar';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import Hero from "@/components/hero";
 import ScrollVideo from "@/components/scrollVideos";
-
 import DemoChat from "@/components/demoChat";
 import VideoCarousel from "@/components/kullanimAlan";
 import Footer from "@/components/footer";

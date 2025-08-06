@@ -6,7 +6,6 @@ import { useTranslations } from "next-intl";
 export default function DemoChat() {
   const t = useTranslations("demoChat");
 
-  // Çeviri metinleri kullanarak her renderda dinamik oluştur
   const exampleAnswers: Record<string, string> = {
     [t("shippingQuestion")]: t("shippingAnswer"),
     [t("appointmentQuestion")]: t("appointmentAnswer"),
@@ -22,7 +21,6 @@ export default function DemoChat() {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // Aynı şekilde dosyadan JSON yükleme ile state güncelleme de uyumlu olması için
     const file = e.target.files?.[0];
     if (!file) return;
 
@@ -38,11 +36,7 @@ export default function DemoChat() {
           return;
         }
 
-        // Burada file ile gelen sorular override ediliyor, ama bu state dışı
-        // Eğer dosya ile override yapmak istersen bunu state haline getirmelisin
-        // Örnek olarak:
-        // setExampleAnswers(json);
-        alert(t("fileLoadedSuccessfully")); // Ekleyebilirsin
+        alert(t("fileLoadedSuccessfully"));
       } catch (error) {
         alert(t("fileReadError") + ": " + error);
       }
@@ -68,8 +62,8 @@ export default function DemoChat() {
   };
 
   return (
-    <section className="bg-gray-100 py-20 px-6 min-h-screen flex flex-col items-center">
-      <h2 className="text-3xl font-bold mb-6">🤖 microAi Canlı Demo</h2>
+    <section className="bg-[#11111b] pt-2 px-6 min-h-screen flex flex-col items-center">
+      <h2 className="text-3xl font-bold mb-6 text-white">🤖 microAi Canlı Demo</h2>
 
       <div className="mb-6 w-full max-w-xl flex justify-center">
         <label
@@ -90,7 +84,7 @@ export default function DemoChat() {
 
       <div className="max-w-xl w-full bg-white p-6 rounded-xl shadow-md flex flex-col space-y-6">
         <div>
-          <h3 className="text-xl font-semibold mb-3">{t("exampleQuestionsTitle")}</h3>
+          <h3 className="text-xl font-semibold mb-3 text-black">{t("exampleQuestionsTitle")}</h3>
           <div className="flex flex-wrap gap-3">
             {exampleQuestions.map((q, i) => (
               <button

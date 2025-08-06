@@ -1,165 +1,131 @@
-'use client';
+"use client";
 
-import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 
-interface MenuItem {
-  href: string;
-  baseColor: string;
-  hoverColor: string;
-  labelKey: string;        // Çeviri anahtarı
-  descriptionKey: string;  // Çeviri anahtarı
-}
+type VideoItem = {
+  id: number;
+  src: string;
+  labelKey: string;
+  descriptionKey: string;
+};
 
-const menuItemsData: MenuItem[] = [
+const videos: VideoItem[] = [
   {
-    href: "/product",
-    baseColor: "#ffffff",
-    hoverColor: "#f43f5e",
-    labelKey: "product.label",
-    descriptionKey: "product.description",
+    id: 0,
+    src: "/videos/e-ticaret.mp4",
+    labelKey: "labels.ecommerce",
+    descriptionKey: "descriptions.orderStatus",
   },
   {
-    href: "/pricing",
-    baseColor: "#d4d4d4",
-    hoverColor: "#10b981",
-    labelKey: "pricing.label",
-    descriptionKey: "pricing.description",
+    id: 1,
+    src: "/videos/saglik.mp4",
+    labelKey: "labels.health",
+    descriptionKey: "descriptions.appointment",
   },
   {
-    href: "/about",
-    baseColor: "#a3a3a3",
-    hoverColor: "#3b82f6",
-    labelKey: "about.label",
-    descriptionKey: "about.description",
+    id: 2,
+    src: "/videos/ilk.mp4",
+    labelKey: "labels.education",
+    descriptionKey: "descriptions.courseInfo",
   },
   {
-    href: "/contact",
-    baseColor: "#737373",
-    hoverColor: "#f59e0b",
-    labelKey: "contact.label",
-    descriptionKey: "contact.description",
-  },
-  {
-    href: "/privacy-policy",
-    baseColor: "#525252",
-    hoverColor: "#8b5cf6",
-    labelKey: "privacyPolicy.label",
-    descriptionKey: "privacyPolicy.description",
+    id: 3,
+    src: "/videos/kurumsal.mp4",
+    labelKey: "labels.corporate",
+    descriptionKey: "descriptions.contactInfo",
   },
 ];
 
-export default function Footer() {
-  const t = useTranslations("footer");
+export default function VideoCarousel() {
+  const t = useTranslations("videoCarousel");
+  const [activeIndex, setActiveIndex] = useState(0);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [progress, setProgress] = useState(0);
 
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [draw, setDraw] = useState(false);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  // Her activeIndex değiştiğinde ended event listener'ı ekle
+  useEffect(() => {
+    const videoEl = videoRef.current;
+    if (!videoEl) return;
+
+    const handleEnded = () => {
+      setActiveIndex((prev) => (prev + 1) % videos.length);
+    };
+
+    videoEl.addEventListener("ended", handleEnded);
+    return () => {
+      videoEl.removeEventListener("ended", handleEnded);
+    };
+  }, [activeIndex]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const triggerPoint = window.innerHeight / 1.2;
-      const footerTop = document.getElementById("footer")?.getBoundingClientRect().top || 0;
-      if (footerTop < triggerPoint) {
-        setDraw(true);
+    setProgress(0); // Video değişince progress sıfırlanır
+
+    const videoEl = videoRef.current;
+    if (!videoEl) return;
+
+    videoEl.load();
+    videoEl.play().catch(() => {
+      videoEl.muted = true;
+      videoEl.play();
+    });
+
+    const handleTimeUpdate = () => {
+      if (videoEl.duration) {
+        const ratio = videoEl.currentTime / videoEl.duration;
+        setProgress(ratio);
       }
     };
 
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    window.addEventListener("mousemove", handleMouseMove);
-    handleScroll();
+    videoEl.addEventListener("timeupdate", handleTimeUpdate);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("mousemove", handleMouseMove);
+      videoEl.removeEventListener("timeupdate", handleTimeUpdate);
     };
-  }, []);
+  }, [activeIndex]);
 
   return (
-    <footer
-      id="footer"
-      className="w-full bg-[#11111b] text-white flex flex-col items-center py-20 select-none"
-    >
-      <div className="w-40 h-40 relative mb-12">
-        <svg
-          viewBox="0 0 200 200"
-          fill="none"
-          stroke="#f87171"
-          strokeWidth="4"
-          strokeLinecap="round"
-          className="w-full h-full"
-        >
-          <path
-            d="M30 40 Q100 10 80 60 Q140 50 90 120"
-            className={`${draw ? "stroke-draw" : "stroke-hidden"}`}
+    <section className="w-full bg-[#11111b] text-white py-16 px-6 shadow-2xl">
+      <div className="max-w-6xl mx-auto flex flex-col items-center">
+        <div className="w-full">
+          <video
+            // key propunu kaldırdım, React video elementini yeniden yaratmaz
+            ref={videoRef}
+            src={videos[activeIndex].src}
+            controls
+            className="w-full rounded-xl border border-[#1e1e2e] shadow-lg"
           />
-          <path
-            d="M90 120 L90 140 L80 130 M90 140 L100 130"
-            className={`${draw ? "stroke-draw" : "stroke-hidden"}`}
-          />
-        </svg>
-      </div>
+        </div>
 
-      <nav className="w-full max-w-[600px] px-4 relative">
-        {menuItemsData.map((item, i) => {
-          const isHovered = hoveredIndex === i;
-          const color = isHovered ? item.hoverColor : item.baseColor;
+        <div className="flex justify-center mt-10 gap-4 w-full">
+          {videos.map((video, i) => {
+            const isActive = i === activeIndex;
+            return (
+              <div key={video.id} className="w-56">
+                <div className="w-full h-1 bg-[#313244] rounded-full overflow-hidden mb-1">
+                  <div
+                    className={`h-full bg-blue-500 transition-all duration-100`}
+                    style={{ width: isActive ? `${progress * 100}%` : "0%" }}
+                  />
+                </div>
 
-          return (
-            <div
-              key={item.href}
-              className="relative my-4"
-              onMouseEnter={() => setHoveredIndex(i)}
-              onMouseLeave={() => setHoveredIndex(null)}
-            >
-              <Link href={item.href}>
-                <div
-                  style={{ color }}
-                  className={`
-                    text-center text-[5vh] font-semibold w-full
-                    transition-all duration-300
-                    cursor-pointer
+                <button
+                  onClick={() => setActiveIndex(i)}
+                  className={`w-full px-4 py-2 rounded-md text-sm font-semibold text-left transition-all
+                    ${
+                      isActive
+                        ? "bg-[#313244] text-white border border-[#585b70]"
+                        : "bg-[#1e1e2e] text-[#cdd6f4] hover:bg-[#313244]"
+                    }
                   `}
                 >
-                  {t(item.labelKey)}
-                </div>
-              </Link>
-
-              {isHovered && (
-                <div
-                  className="fixed px-4 py-2 rounded-md text-sm font-medium text-white z-50 pointer-events-none transition-all duration-150"
-                  style={{
-                    top: mousePos.y + 16,
-                    left: mousePos.x + 16,
-                    backgroundColor: color,
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  {t(item.descriptionKey)}
-                </div>
-              )}
-            </div>
-          );
-        })}
-      </nav>
-
-      <style jsx>{`
-        .stroke-draw {
-          stroke-dasharray: 300;
-          stroke-dashoffset: 0;
-          transition: stroke-dashoffset 2s ease-in-out;
-        }
-        .stroke-hidden {
-          stroke-dasharray: 300;
-          stroke-dashoffset: 300;
-          transition: stroke-dashoffset 2s ease-in-out;
-        }
-      `}</style>
-    </footer>
+                  <strong>{t(video.labelKey)}:</strong> {t(video.descriptionKey)}
+                </button>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
   );
 }
