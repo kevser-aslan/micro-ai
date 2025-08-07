@@ -36,7 +36,7 @@ export default function ScrollVideoWithText() {
   const t = useTranslations("draw");
   const videoRef = useRef<HTMLVideoElement>(null);
   const [started, setStarted] = useState(false);
-
+//video için
   useEffect(() => {
     const handleScroll = () => {
       if (started) return;

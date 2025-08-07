@@ -11,7 +11,7 @@ interface MenuItem {
   key: keyof typeof footerKeys;
 }
 
-// Bu key'ler common.json'daki footer objesindeki anahtarlarla birebir eşleşmeli
+// Bu keyler commonjson'daki footer objesindeki anahtarlarla birebir eşleşiyo
 const footerKeys = {
   product: "product",
   pricing: "pricing",

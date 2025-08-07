@@ -4,8 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 
-// DrawPath component (aynı dosyada da olabilir, ayrı da)
-// Scroll sonrası animasyonu resetleyen path çizimi
+
 function DrawPath() {
   const [key, setKey] = useState(0);
 
@@ -40,7 +39,7 @@ function DrawPath() {
   );
 }
 
-// DrawWithText component
+
 function DrawWithText() {
   const t = useTranslations("draw");
 

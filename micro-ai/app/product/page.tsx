@@ -13,7 +13,7 @@ import AnimatedLanguageSelector from '../../components/AnimatedLanguageSelector'
 function ProductContent({ locale, setLocale }: { locale: string; setLocale: React.Dispatch<React.SetStateAction<string>> }) {
   const t = useTranslations('product');
 
-  // features varsa al, yoksa boş dizi yap
+  
   let features: string[] = [];
   try {
     const f = t('features');
@@ -30,7 +30,7 @@ function ProductContent({ locale, setLocale }: { locale: string; setLocale: Reac
         <h1 className="text-[90px] font-black text-[#8C82FC] leading-none tracking-wider animate-zoom-in">
           {t('title')}
         </h1>
-        {/* subtitle varsa göster */}
+        
        
       </div>
 

@@ -89,7 +89,7 @@ export default function VideoCarousel() {
       <div className="max-w-6xl mx-auto flex flex-col items-center">
         <div className="w-full">
           <video
-            // key propunu kaldırdım, React video elementini yeniden yaratmaz
+            
             ref={videoRef}
             src={videos[activeIndex].src}
             controls

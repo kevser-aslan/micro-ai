@@ -54,57 +54,56 @@ function ContactContent({
       </header>
 
       {/* İçerik */}
-      <main className="relative z-10 flex flex-col md:flex-row items-center justify-center h-full px-6 text-white pt-20 gap-32 max-w-7xl mx-auto">
-        {/* Sol taraf - Başlık ve kısa metin */}
-        <section className="flex-1 flex flex-col items-center md:items-start text-center md:text-left space-y-6">
-          <h1
-            className={`${caveat.className} font-bold`}
-            style={{ fontSize: '90px', color: '#FFFFFF' }}
-          >
-            {t('title')}
-          </h1>
-          <p className="max-w-md text-lg text-[#CCCCCC]">{t('description')}</p>
-        </section>
+      <main className="relative w-full h-full px-6 text-white max-w-7xl mx-auto">
+  {/* Sol taraf - Başlık ve kısa metin */}
+  <section
+    className={`${caveat.className} absolute top-1/2 -left-20 transform -translate-y-1/2 flex flex-col items-start space-y-6 max-w-lg`}
+  >
+    <h1 className="font-bold text-[90px] text-white">{t('title')}</h1>
+    <p className="text-lg text-[30px] text-[#CCCCCC]">{t('description')}</p>
+  </section>
 
-        {/* Sağ taraf - İletişim Bilgileri Kutusu */}
-        <section className="flex-1 bg-[#1a1a2e]/80 backdrop-blur-md rounded-2xl p-5 shadow-lg max-w-md w-full ml-auto mr-1 space-y-6">
-          {/* E-posta */}
-          <div className="flex items-center gap-4">
-            <EmailIcon />
-            <a
-              href="mailto:destek@microai.com"
-              className="text-lg text-white hover:text-[#8C82FC] transition-colors duration-300"
-            >
-              destek@microai.com
-            </a>
-          </div>
+  {/* Sağ taraf - İletişim Bilgileri Kutusu */}
+  <section className="hidden md:block absolute -right-20 top-1/2 transform -translate-y-1/2 bg-[#1a1a2e]/80 backdrop-blur-md rounded-2xl p-5 shadow-lg space-y-6 w-[400px]">
+    {/* E-posta */}
+    <div className="flex items-center gap-4">
+      <EmailIcon />
+      <a
+        href="mailto:destek@microai.com"
+        className="text-lg text-white hover:text-[#8C82FC] transition-colors duration-300"
+      >
+        destek@microai.com
+      </a>
+    </div>
 
-          {/* WhatsApp */}
-          <div className="flex items-center gap-4">
-            <WhatsappIcon />
-            <a
-              href="https://wa.me/905XXXXXXXXX"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-lg text-white hover:text-[#8C82FC] transition-colors duration-300"
-            >
-              +90 5XX XXX XX XX
-            </a>
-          </div>
+    {/* WhatsApp */}
+    <div className="flex items-center gap-4">
+      <WhatsappIcon />
+      <a
+        href="https://wa.me/905XXXXXXXXX"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-lg text-white hover:text-[#8C82FC] transition-colors duration-300"
+      >
+        +90 5XX XXX XX XX
+      </a>
+    </div>
 
-          {/* Telefon */}
-          <div className="flex items-center gap-4">
-            <PhoneIcon />
-            <span className="text-lg text-white">+90 XXX XXX XX XX</span>
-          </div>
+    {/* Telefon */}
+    <div className="flex items-center gap-4">
+      <PhoneIcon />
+      <span className="text-lg text-white">+90 XXX XXX XX XX</span>
+    </div>
 
-          {/* Konum */}
-          <div className="flex items-center gap-4">
-            <LocationIcon />
-            <span className="text-lg text-white">{t('location')}</span>
-          </div>
-        </section>
-      </main>
+    {/* Konum */}
+    <div className="flex items-center gap-4">
+      <LocationIcon />
+      <span className="text-lg text-white">{t('location')}</span>
+    </div>
+  </section>
+</main>
+
+
     </div>
   );
 }
@@ -128,6 +127,7 @@ function EmailIcon() {
       />
     </svg>
   );
+  
 }
 function WhatsappIcon() {
   return (
